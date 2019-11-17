@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--BOOTSTRAP-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!--MEDIUM EDITOR-->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+<!--CUSTOM CSS-->
+    <link rel="stylesheet" href='{% static "css/blog.css"%}'>
+<!--FONTS-->
+    <link href="https://fonts.googleapis.com/css?family=Big+Shoulders+Text|Montserrat&display=swap" rel="stylesheet">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<div class="container" id="main">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary techfont custom-navbar">
+  <a class="navbar-brand bigbrand" href="{% url 'blog_app:post_list' %}">BLOG</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'blog_app:about'%}">About <span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="https://www.github.com/jayanwana">GitHub <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+      <ul class="navbar-nav my-2 my-lg-0">
+                {% if user.is_authenticated %}
+        <li class="nav-item active">
+        <a class="nav-link" href="{% url 'blog_app:post_new' %}">New Post <span class="sr-only">(current)</span></a>
+      </li>
+           <li class="nav-item active">
+        <a class="nav-link" href="{% url 'blog_app:drafts_list' %}">Drafts <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+          <li class="nav-item">
+        <a class="nav-link">Welcome: {{ user.username }}</a>
+      </li>
+        {% else %}
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+      </li>
+        {% endif %}
+    </ul>
+  </div>
+</nav>
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog_posts"> 
+                     {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>
