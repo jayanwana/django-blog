@@ -2,21 +2,20 @@
 {% extends "blog_app/base.html" %}
 
 {% block head %}
-<title>Home</title>
+    <title>Home</title>
 {% endblock %}
 
 {% block body %}
-<div class="centerstage loader">
+    <div class="centerstage loader">
 
-    {% for post in post_list %}
-    <div class="post">
-        <h1><a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{post.title}}</a></h1>
-        <div class="date">
-            <p>Published on: {{post.published_date|date:'D d M Y'}}</p>
+        {% for post in post_list %}
+        <div class="post">
+            <h1><a href="{% url 'blog_app:post_detail' pk=post.pk %}">{{post.title}}</a></h1>
+            <div class="date">
+                <p>Published on: {{post.published_date|date:'D d M Y'}}</p>
+            </div>
+            <a href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.approve_comment.count }}</a>
         </div>
-        <a href="{% url 'blog_app:post_detail' pk=post.pk %}">Comments: {{ post.approve_comment.count }}</a>
+        {% endfor %}
     </div>
-    {% endfor %}
-
-</div>
 {% endblock %}

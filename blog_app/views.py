@@ -7,15 +7,22 @@ from django.urls import reverse_lazy
 from django.views.generic import (TemplateView, ListView,
                                   DetailView, CreateView,
                                   UpdateView, DeleteView)
-from .forms import *
+from .forms import PostForm, CommentForm
 # Create your views here.
 
 
 class AboutView(TemplateView):
+    """
+    Creates the about page view
+    """
     template_name = 'about.html'
 
 
 class PostListView(ListView):
+    """
+    Creates the post list view which doubles as the home page.
+    A list of all Published blog posts
+    """
     model = Post
 
     def get_queryset(self):
@@ -23,10 +30,17 @@ class PostListView(ListView):
 
 
 class PostDetailView(DetailView):
+    """
+    Renders a detailed view of a selected blog post
+    """
     model = Post
+    comment = Comment
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
+    """
+    Create a new blog post using the Post Form
+    """
     login_url = '/login/'
     redirect_field_name = 'blog_app/post_detail.html'
     model = Post
@@ -34,6 +48,9 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    Edit An instance of the Post class
+    """
     login_url = '/login/'
     redirect_field_name = 'blog_app/post_detail.html'
     model = Post
@@ -41,6 +58,9 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Delete An instance of the Post class
+    """
     login_url = '/login/'
     redirect_field_name = 'blog_app/post_detail.html'
     model = Post
@@ -49,6 +69,9 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 
 class DraftListView(LoginRequiredMixin, ListView):
+    """
+    View all unpublished Posts
+    """
     login_url = '/login/'
     redirect_field_name = 'blog_app/post_detail.html'
     model = Post

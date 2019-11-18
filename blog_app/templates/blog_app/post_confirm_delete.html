@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 {% extends "blog_app/base.html" %}
+
 {% block head %}
-<title>Confirm Delete</title>
+    <title>Confirm Delete</title>
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <form method="POST">
-        {% csrf_token %}
-        <p>Are you sure you want to delete {{ object }}?</p>
-        <input type="submit" class="btn btn-danger" value="Confirm">
-    </form>
-</div>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete {{ object }}?</p>
+            <input type="submit" class="btn btn-danger" value="Confirm">
+        </form>
+    </div>
 {% endblock %}

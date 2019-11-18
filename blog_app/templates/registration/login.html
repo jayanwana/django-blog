@@ -2,19 +2,19 @@
 {% extends 'blog_app/base.html' %}
 
 {% block head %}
-<title>Login</title>
+    <title>Login</title>
 {% endblock %}
 
 {% block body %}
-<div class="jumbotron">
-    <h2>Please Login</h2>
-    <h3>Contact Admin For more Info</h3>
+    <div class="jumbotron">
+        <h2>Please Login</h2>
+        <h3>Contact jayanwana@gmail.com For more Info</h3>
 
-    <form action="{% url 'login' %}" method="POST">
+        <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             {% include 'blog_app/bs4_form.html' with form=form %}
             <button type="submit" class="btn btn-primary">Login</button>
             <input type="hidden" name="next" value="{{next}}">
         </form>
-</div>
+    </div>
 {% endblock %}
