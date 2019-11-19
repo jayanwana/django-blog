@@ -75,6 +75,7 @@ class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
     redirect_field_name = 'blog_app/post_detail.html'
     model = Post
+    template_name = 'drafts_list.html'
 
     def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('-create_date')
